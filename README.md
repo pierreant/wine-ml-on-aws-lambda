@@ -28,9 +28,9 @@ both Lambdas are in the same file `predict_wine.py`
     The other folders are containing libraries (Numpy, Scikit Learn, Pandas) needed to run the code. 
     They have been compiled for the Lambda runtime. They will not work locally.
  
- 2. Upload the compressed file to one of your S3 bucket.
+ 2. Upload the compressed file to one of your S3 buckets.
  
- 3. Create an S3 bucket called 'wine-prediction' to save the models.
+ 3. Create an S3 bucket called `wine-prediction to save the models.
  
  4. In IAM 
     1. Create a policy that enable to read and write object to your S3 bucket. The policy should look similar to:
@@ -51,7 +51,7 @@ both Lambdas are in the same file `predict_wine.py`
 }
 ``
     
-    2. Create an IAM role (lets call it ``wine-s3-rw`` ), and attached the created policy.
+    2. Create an IAM role (lets call it ``wine-s3-rw`` ) and attach the created policy.
     
   5. Create a lambda function 
      * in "Function Code"
@@ -93,7 +93,7 @@ both Lambdas are in the same file `predict_wine.py`
      
      * Returns: the predicted quality grade
      
-     Once the model train this step can obviously be run with different input values without need to retain the model.
+     Once the model trained this step can obviously be run with different input values without need to retain the model.
  
  
  

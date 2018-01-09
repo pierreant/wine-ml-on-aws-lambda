@@ -3,9 +3,9 @@
 
 ## Scikit Learn Machine Learning Model on AWS Lambda
 
-This repo show how to train a Machine Learning model with Scikit Learn and Panda on AWS lambda. 
-The trained model will be able to predict the quality of a wine base on some parameters. 
-To train the model we are using the dataset available here https://archive.ics.uci.edu/ml/datasets/wine.
+This repo show how to train a Machine Learning regression model with Scikit Learn on AWS lambda. 
+The trained model will be able to predict the quality of a wine based on some parameters. 
+To train the model we are using the dataset available here https://archive.ics.uci.edu/ml/datasets/wine .
 
 
 ## The general architecture
@@ -25,7 +25,7 @@ both Lambdas are in the same file `predict_wine.py`
  
  1. Compress all the files in a single zip file.
     * The folder structure need to remain as in the repo. 
-    The other folder are containing libraries (Numpy, Scikit Learn, Pandas) needed to run the code. 
+    The other folders are containing libraries (Numpy, Scikit Learn, Pandas) needed to run the code. 
     They have been compiled for the Lambda runtime. They will not work locally.
  
  2. Upload the compressed file to one of your S3 bucket.
@@ -63,16 +63,16 @@ both Lambdas are in the same file `predict_wine.py`
         * use the created  "wine-s3-rw" role
      * in "Basic settings"
         * make sure to give decent amount of memory (eg 800 MB)
-        * give a couple of second for the lambda to finish (eg 3)
+        * give a couple of seconds for the lambda to finish (eg 3)
   
-  6. The lambda that will create the model is triggered by using `predict_wine.predict_with_model` as handler.
+  6. The lambda that will **create the model** is triggered by using `predict_wine.predict_with_model` as handler.
   
      * Input: none
      * Returns: the saved model name (example: model-12408`)
    
-  7. Once the model created. The prediction can be done by using `predict_wine.predict_with_model` as handler.
+  7. Once the model created. The **prediction** can be done by using `predict_wine.predict_with_model` as handler.
     
-     * Input: json with the model name outputed in the previous step and the various information about the wine to predict the quality from. See example below:
+     * Input: json with the model name outputted in the previous step and the various information about the wine to predict the quality from. See example below:
      
      ``
      {

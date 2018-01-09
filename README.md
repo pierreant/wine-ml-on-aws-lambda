@@ -21,7 +21,7 @@ The code is split into 2 Lambdas:
     
 both Lambdas are in the same file `predict_wine.py
     
- ## How do I run this in AWS Lambda`?
+ ## How do I run this in AWS Lambda?
  
  1. Compress all the files in a single zip file.
     * The folder structure need to remain as in the repo. 

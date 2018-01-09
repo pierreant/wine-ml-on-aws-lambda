@@ -19,7 +19,7 @@ The code is split into 2 Lambdas:
     * Read the model from S3
     * Predict the value based on the Lambda input
     
-both Lambdas are in the same file `predict_wine.py
+both Lambdas are in the same file `predict_wine.py`
     
  ## How do I run this in AWS Lambda?
  

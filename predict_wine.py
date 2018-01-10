@@ -7,11 +7,13 @@ import pickle
 import random
 import logging
 import boto3
+import os
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
-s3_bucket = 'wine-prediction'
+s3_bucket = os.environ['s3_model_bucket']
+logger.info("Bucket for model is: " + str(s3_bucket))
 
 def train_model(event, context):
 

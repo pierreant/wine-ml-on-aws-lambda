@@ -1,0 +1,39 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: AWS SAM template configuring for Wine Regression example on AWS
+Transform: 'AWS::Serverless-2016-10-31'
+Resources:
+  TrainWineModel:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Description: 'Lambda to train the regression model and save the resulting model in S3'
+      CodeUri: 's3://bucket-with-lambda-code/regression-on-lambda-code.zip'
+      Handler: predict_wine.train_model
+      Runtime: python2.7
+      Timeout: 10
+      MemorySize: 1024
+      Policies:
+        - S3CrudPolicy:
+            BucketName: !Ref ModelS3Bucket
+      Environment:
+        Variables:
+          s3_model_bucket: !Ref ModelS3Bucket
+
+  PredictWine:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Description: 'Lambda to predict the quality of the wine based on a model created by the TrainWineModel Lambda'
+      CodeUri: s3://bucket-with-lambda-code/regression-on-lambda-code.zip
+      Handler: predict_wine.predict_with_model
+      Runtime: python2.7
+      Timeout: 10
+      MemorySize: 1024
+      Policies:
+        - S3CrudPolicy:
+            BucketName: !Ref ModelS3Bucket
+      Environment:
+        Variables:
+          s3_model_bucket: !Ref ModelS3Bucket
+
+  ModelS3Bucket:
+    Type: 'AWS::S3::Bucket'
+    Description: 'S3 bucket destination of the models.'

@@ -30,7 +30,20 @@ both Lambdas are in the same file `predict_wine.py`
  
  2. Upload the compressed file to one of your S3 buckets.
  
- 3. Create an S3 bucket called `wine-prediction to save the models.
+### Alternative #1 to create the resources: Using AWS SAM
+ 
+ 3. Update the zip location in the sam-deployment-template.yaml file to match the place where you uploaded the code in the previous step.
+  
+ 4. Create the resources with the SAM command line. It should look similar to:
+ 
+```
+sam deploy --template-file sam-deployment-template.yaml --stack-name someNameForYourStack --capabilities CAPABILITY_IAM
+```
+ 5. No step 5 in this alternative. You can move directly to step 6.
+
+### Alternative #2 to create the resources: Using the console
+ 
+ 3. Create an S3 bucket called ``wine-prediction`` to save the models.
  
  4. In IAM 
     1. Create a policy that enable to read and write object to your S3 bucket. The policy should look similar to:
@@ -64,36 +77,44 @@ both Lambdas are in the same file `predict_wine.py`
      * in "Basic settings"
         * make sure to give decent amount of memory (eg 800 MB)
         * give a couple of seconds for the lambda to finish (eg 3)
+     * in "Environment variable"
+       * put the "s3_model_bucket" as key and the name of the bucket you created (e.g. ``wine-prediction``)
+       
+### Running the created lambdas
   
   6. The lambda that will **create the model** is triggered by using `predict_wine.predict_with_model` as handler.
   
      * Input: none
-     * Returns: the saved model name (example: model-12408`)
+     * Returns: the saved model name (example: *model-12408*)
    
   7. Once the model created. The **prediction** can be done by using `predict_wine.predict_with_model` as handler.
     
      * Input: json with the model name outputted in the previous step and the various information about the wine to predict the quality from. See example below:
-     
-     ``
-     {
-        "model name": "model-12408",
-        "fixed acidity": "7.4",
-        "volatile acidity": "0.70",
-        "citric acid": "0.00",
-        "residual sugar": "1.9",
-        "chlorides": "0.076",
-        "free sulfur dioxide": "11.0",
-        "total sulfur dioxide": "34.0",
-        "density": "0.9978",
-        "pH": "3.51",
-        "sulphates": "0.56",
-        "alcohol": "9.4"
-     }
-     ``
-     
+       * Don't forget to update the model number with the one from the previous function.
      * Returns: the predicted quality grade
      
-     Once the model trained this step can obviously be run with different input values without need to retain the model.
+     
+ ```
+ {
+    "model name": "model-12408",
+    "fixed acidity": "7.4",
+    "volatile acidity": "0.70",
+    "citric acid": "0.00",
+    "residual sugar": "1.9",
+    "chlorides": "0.076",
+    "free sulfur dioxide": "11.0",
+    "total sulfur dioxide": "34.0",
+    "density": "0.9978",
+    "pH": "3.51",
+    "sulphates": "0.56",
+    "alcohol": "9.4"
+ }
+ ```
+          
+     
+     
+     
+  Once the model trained this step can obviously be run with different input values without need to retain the model.
  
  
  

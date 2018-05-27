@@ -10,7 +10,7 @@ To train the model we are using the dataset available here https://archive.ics.u
 
 ## The general architecture
 
-The code is split into 2 Lambdas:
+As depicted in the diagram below, the code is split into 2 Lambdas:
 
  1. The training Lambda
     * Train the model
@@ -20,6 +20,8 @@ The code is split into 2 Lambdas:
     * Predict the value based on the Lambda input
     
 both Lambdas are in the same file `predict_wine.py`
+
+![alt text](https://raw.githubusercontent.com/pierreant/wine-ml-on-aws-lambda/master/readme_images/high-level-diagram.png)
     
  ## How do I run this in AWS Lambda?
 

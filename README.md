@@ -22,6 +22,13 @@ The code is split into 2 Lambdas:
 both Lambdas are in the same file `predict_wine.py`
     
  ## How do I run this in AWS Lambda?
+
+ This app is available as demo app in the AWS Serverless repo. You can therefore deploy it in a single click to your AWS account from the AWS Serverless repo here:
+
+ * https://serverlessrepo.aws.amazon.com/applications/arn:aws:serverlessrepo:us-east-1:773146748696:applications~machine-learning-with-scikit-learn-on-lamdba 
+
+ Alternatively you can follow the steps below to deploy it manually:
+
  
  1. Compress all the files in a single zip file.
     * The folder structure need to remain as in the repo. 
